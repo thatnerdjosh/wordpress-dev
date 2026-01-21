@@ -5,14 +5,17 @@ services:
     ports:
       - 8080:80
     environment:
+      APACHE_RUN_USER: $APACHE_RUN_USER
+      APACHE_RUN_GROUP: $APACHE_RUN_GROUP
+
       WORDPRESS_DB_HOST: $WORDPRESS_DB_HOST
       WORDPRESS_DB_USER: $WORDPRESS_DB_USER
       WORDPRESS_DB_PASSWORD: $WORDPRESS_DB_PASSWORD
       WORDPRESS_DB_NAME: $WORDPRESS_DB_NAME
     volumes:
-      - ./site:/var/www/html
-      - ./plugins:/var/www/html/wp-content/plugins
-      - ./themes:/var/www/html/wp-content/themes
+      - ./site:/var/www/html # For autocompletion
+      - ./dev/wp-content/plugins:/var/www/html/wp-content/plugins
+      - ./dev/wp-content/themes:/var/www/html/wp-content/themes
 
   db:
     image: mysql:8.0
@@ -27,4 +30,4 @@ services:
 
 volumes:
   db:
-  wordpress:
+
